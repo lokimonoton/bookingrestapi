@@ -269,14 +269,16 @@
                                         <% for(var panda in data[0]){%>
                                             <th><%=panda %></th>
                                          <% }%>
-
+<%if(type=="booking"){%>
+<th>view</th>
+<%}%>
                                     </thead>
                                     <tbody>
                            <%if(type=="booking"){%>
-                                        <tr ng-click="redirect(booking.travelerId,booking.flightIds)" ng-repeat="booking in bookings">
+                                        <tr  ng-repeat="booking in bookings">
 
                                             <td ng-repeat="(key,value) in booking">{{value}}</td>
-
+<td><a ng-click="redirect(booking.travelerId,booking.flightIds)" class="waves-effect waves-light btn">VIEW</a></td>
                                         </tr>
                             <%}else{%>
                                 <tr  ng-repeat="booking in bookings">

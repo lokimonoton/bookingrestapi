@@ -1,11 +1,26 @@
 {
-    "booking":[
-  {
-    "id" : 123231,
-    "date": "19122017",
-    "cost": 420,
-    "miles": 1500,
-    "travelerId": 101,
-    "flightIds": [231,324]
-  }
-]}
+  "booking": [
+    {
+      "id": 123231,
+      "date": "19122017",
+      "cost": 420,
+      "miles": 1500,
+      "travelerId": 101,
+      "flightIds": [
+        231,
+        324
+      ]
+    },
+    {
+      "id": 123232,
+      "date": "12 December, 2017",
+      "cost": 1234,
+      "miles": 412,
+      "travelerId": 102,
+      "flightIds": [
+        325,
+        326
+      ]
+    }
+  ]
+}

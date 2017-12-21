@@ -8,6 +8,8 @@ const adapterTraveler = new FileSync(__dirname+'/traveler.json')
 const dbBooking = low(adapterBooking)
 const dbFlight = low(adapterFlight)
 const dbTraveler = low(adapterTraveler)
+const bodyParser=require('body-parser')
+app.use(bodyParser.json())
 app.set('views',__dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
@@ -35,10 +37,6 @@ app.get('/flight', (req, res) =>{
 const pakim=dbFlight.get('flight').value()
   res.render('table',{data:pakim,type:"flight"})
 })
-app.get('/random', (req, res) =>{
-// const pakim=dbFlight.get('flight').value()
-  res.render('form.html')
-})
 app.get('/generator', (req, res) =>{
 const pakim=dbBooking.get('booking').value()
 const pakim2=dbTraveler.get('traveler').value()
@@ -65,24 +63,61 @@ const cam=dbFlight.get('flight').value()
 })
 app.get('/getBookingById',(req,res)=>{
 
-const cam=dbBooking.get('booking').find({id:Number(req.query.id)})
-  .value()
+const cam=dbBooking.get('booking').find({id:Number(req.query.id)}).value()
+const cam2=dbTraveler.get('traveler').find({id:Number(cam.travelerId)}).value()
+  let flight1=[]
+  let travel1=[]
+  travel1.push(cam2)
+  cam.flightIds.forEach(flights=>{
+
+const pakim=dbFlight.get('flight').find({id:Number(flights)}).value()
+flight1.push(pakim)
+  })
   if(cam==undefined){
 res.json([])
   }else{
-      res.json(cam)
+      res.json({booking:cam,flight:flight1,traveler:travel1})
   }
 
 })
 app.get('/getBookingByTravelerId',(req,res)=>{
+const cam=dbBooking.get('booking').find({travelerId:Number(req.query.id)}).value()
+const cam2=dbTraveler.get('traveler').find({id:Number(cam.travelerId)}).value()
+  let flight1=[]
+  let travel1=[]
+  travel1.push(cam2)
+  cam.flightIds.forEach(flights=>{
 
-const cam=dbBooking.get('booking').find({travelerId:Number(req.query.id)})
-  .value()
- if(cam==undefined){
+const pakim=dbFlight.get('flight').find({id:Number(flights)}).value()
+flight1.push(pakim)
+  })
+  if(cam==undefined){
 res.json([])
   }else{
-      res.json(cam)
+      res.json({booking:cam,flight:flight1,traveler:travel1})
   }
+})
+app.get('/getTravelerById', (req, res) =>{
+const cam=dbTraveler.get('traveler').find({id:req.query.id}).value()
+  res.json(cam)
+})
+app.get('/getTravelerByLoyalityNum', (req, res) =>{
+const cam=dbTraveler.get('traveler').find({loyalityNumber:req.query.loyalitynumber}).value()
+  res.json(cam)
+})
+app.get('/getFlightById', (req, res) =>{
+const cam=dbFlight.get('flight').find({id:Number(req.query.id)}).value()
+  res.json(cam)
+})
+app.post('/createBooking', (req, res) =>{
+console.log(req.body)
+const booking = dbBooking.get('booking').push(req.body.booking[0]).write()
+const traveler = dbTraveler.get('traveler').push(req.body.traveler[0]).write()
+req.body.flight.forEach(flying=>{
+const flight = dbFlight.get('flight').push(flying).write()
+})
+
+res.send("success")
 })
 
 app.listen(process.env.PORT, () => console.log('Example app listening on port 3000!'))

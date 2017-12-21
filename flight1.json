@@ -1,0 +1,24 @@
+{"flight":[
+  {
+    "id": 231,
+    "code": "EK871",
+    "miles": 750,
+    "depAirportCode": "DXB",
+    "depDate": "13012018",
+    "depTime": "12:00",
+    "arrAirportCode": "KWI",
+    "arrDate": "13012018",
+    "arrTime": "12:50"
+  },
+  {
+    "id": 324,
+    "code": "EK858",
+    "miles": 750,
+    "depAirportCode": "KWI",
+    "depDate": "19012018",
+    "depTime": "17:45",
+    "arrAirportCode": "DXB",
+    "arrDate": "19012018",
+    "arrTime": "20:30"
+  }
+]}

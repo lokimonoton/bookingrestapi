@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Traveler</title>
 
+
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="assets/materialize/css/materialize.min.css" media="screen,projection" />
     <!-- Bootstrap Styles-->
@@ -20,6 +21,7 @@
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css">
+<link href="assets/materialize.clockpicker.css" rel="stylesheet">
 </head>
 <body>
     <div id="wrapper">
@@ -286,7 +288,7 @@ Booking details
       <div class="row">
         <div class="input-field col s12">
           <label for="disabled">MILES(auto generated)</label>
-          <input disabled style="color:black;" ng-value="miles" id="disabled" type="text" class="validate">
+          <input disabled style="color:black;" id="miles" value="0" id="disabled" type="text" class="validate">
 
         </div>
       </div>
@@ -380,7 +382,7 @@ Traveler details
 Flight Details
                         </div>
                         <div class="card-content">
- <b>Departure</b>
+
   <div class="row">
         <div class="input-field col s12">
           <label for="disabled">ID(auto generated)</label>
@@ -404,13 +406,85 @@ Flight Details
         </div>
 
       </div>
+      <div class="row">
+      <div class="input-field col s12">
+          <label for="disabled">DEPARTURE AIRPORT CODE*</label>
+       <input type="text" >
+
+        </div>
+
+      </div>
+      <div class="row">
+      <div class="input-field col s12">
+          <label for="disabled">DEPARTURE DATE*</label>
+       <input type="text" class="datepicker">
+
+        </div>
+
+      </div>
+      <div class="row">
+      <div class="input-field col s12">
+          <label for="disabled">DEPARTURE TIME*</label>
+       <input type="text" class="timepicker">
+
+        </div>
+
+      </div>
+      <div class="row">
+      <div class="input-field col s12">
+          <label for="disabled">ARRIVAL AIRPORT CODE*</label>
+       <input type="text" >
+
+        </div>
+
+      </div>
+      <div class="row">
+      <div class="input-field col s12">
+          <label for="disabled">ARRIVAL DATE*</label>
+       <input type="text" class="datepicker">
+
+        </div>
+
+      </div>
+      <div class="row">
+      <div class="input-field col s12">
+          <label for="disabled">ARRIVAL TIME*</label>
+       <input type="text" class="timepicker">
+
+        </div>
+
+      </div>
+<a class="waves-effect waves-light btn" ng-click="addFlightDetail()">ADD FLIGHT DETAIL</a>
+    <br><br>
+    <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover"  >
+                                    <thead>
+
+                                            <th ng-repeat="(key,value) in flightDetail[0]">{{key}}</th>
+
+
+                                    </thead>
+                                    <tbody>
+
+                                        <tr ng-repeat="flight in flightDetail">
+
+                                            <td ng-repeat="(key,value) in flight">{{value}}</td>
+                                            <td><a class="waves-effect waves-light btn" ng-click="delete($index)">Delete</a></td>
+                                        </tr>
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
-                               <footer><a class="waves-effect waves-light btn" >Save</a></footer>
+                               <footer><a class="waves-effect waves-light btn" ng-click="save()" >Save</a></footer>
     </div>
              <!-- /. PAGE INNER  -->
             </div>
@@ -418,10 +492,10 @@ Flight Details
      <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> Download
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.min.js"></script> Download
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script> Download
-<script src="assets/angular-datatables.min.js"></script> Download
+<script src="assets/jquery.min.js"></script>
+<script src="assets/jquery.dataTables.min.js"></script>
+<script src="assets/angular.min.js"></script>
+<script src="assets/angular-datatables.min.js"></script>
     <!-- jQuery Js -->
     <!--<script src="assets/js/jquery-1.10.2.js"></script>-->
 
@@ -435,11 +509,11 @@ Flight Details
     <!-- Morris Chart Js -->
     <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
     <script src="assets/js/morris/morris.js"></script>
-
+<script src="assets/moment.min.js"></script>
 
 	<script src="assets/js/easypiechart.js"></script>
 	<script src="assets/js/easypiechart-data.js"></script>
-
+<script src="assets/materialize.clockpicker.js"></script>
 	 <script src="assets/js/Lightweight-Chart/jquery.chart.js"></script>
 	 <!-- DATA TABLE SCRIPTS -->
     <!--<script src="assets/js/dataTables/jquery.dataTables.js"></script>-->
@@ -453,12 +527,129 @@ Flight Details
     close: 'Ok',
     closeOnSelect: false // Close upon selecting a date,
   });
+  $('.timepicker').pickatime({
+    default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+    fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+    twelvehour: false, // Use AM/PM or 24-hour format
+    donetext: 'OK', // text for done-button
+    cleartext: 'Clear', // text for clear-button
+    canceltext: 'Cancel', // Text for cancel-button
+    autoclose: false, // automatic close timepicker
+    ampmclickable: true, // make AM PM clickable
+    aftershow: function(){} //Function for after opening timepicker
+  });
 
             angular.module('myModule', ['datatables'])
 .controller("MyCtrl", function($scope,$http, DTOptionsBuilder)
 {
     $scope.bookings = [];
+$scope.flightDetail=[]
+$scope.addFlightDetail=function(){
+    const kosong=$(".card-content").eq(2).children("div.row").children("div").children("input")
+var sudah=[]
+for(var i=0;i<kosong.length;i++){
+if(kosong.eq(i).val()==""){
+kosong.eq(i).attr("class","invalid")
+}else{
+    sudah.push(kosong.eq(i).val())
+}
+}
+if(sudah.length==9){
+var faik={}
+faik.id=Number(sudah[0])
+faik.code=sudah[1]
+faik.miles=Number(sudah[2])
+faik.depAirportCode=sudah[3]
+faik.depDate=sudah[4]
+faik.depTime=sudah[5]
+faik.arrAirportCode=sudah[6]
+faik.arrDate=sudah[7]
+faik.arrTime=sudah[8]
+$("#miles").val(Number($("#miles").val())+Number(sudah[2]))
+$scope.flightDetail.push(faik)
+kosong.attr("class","")
+kosong.eq(0).val(Number(kosong.eq(0).val())+1)
+for(let i=1;i<kosong.length;i++){
+    kosong.eq(i).val("")
+}
+}else{
+    alert("please fill all the blank")
+}
+}
 
+$scope.delete=function(index){
+    $("#miles").val(Number($("#miles").val())-Number($scope.flightDetail[index].miles))
+    $scope.flightDetail.splice(index,1)
+    // console.log(index)
+}
+$scope.save=function(){
+     const kosong=$(".card-content").eq(1).children("div.row").children("div").children("input")
+     const kosong1=$(".card-content").eq(0).children("div.row").children("div").children("input")
+var travel=[]
+var booking=[]
+var sudah=[]
+var sudah1=[]
+for(var i=0;i<kosong.length;i++){
+if(kosong.eq(i).val()==""){
+kosong.eq(i).attr("class","invalid")
+}else{
+    sudah.push(kosong.eq(i).val())
+}
+}
+for(var i=0;i<kosong1.length;i++){
+if(kosong1.eq(i).val()==""){
+kosong1.eq(i).attr("class","invalid")
+}else{
+    sudah1.push(kosong1.eq(i).val())
+}
+}
+if(sudah1.length==4&&sudah.length==8&&$scope.flightDetail.length!=0){
+let sementara={}
+sementara.id=Number(sudah[0])
+sementara.firstName=sudah[1]
+sementara.lastName=sudah[2]
+sementara.birthDate=sudah[3]
+sementara.passportNumber=sudah[4]
+sementara.passportCountryCode=sudah[5]
+sementara.passportExpiryDate=sudah[6]
+sementara.loyalityNumber=sudah[7]
+travel.push(sementara)
+let sementara1={}
+sementara1.id=Number(sudah1[0])
+sementara1.date=sudah1[1]
+sementara1.cost=Number(sudah1[2])
+sementara1.miles=Number(sudah1[3])
+sementara1.travelerId=sementara.id
+sementara1.flightIds=[]
+$scope.flightDetail.forEach(fly=>{
+sementara1.flightIds.push(fly.id)
+})
+booking.push(sementara1)
+$http.post("/createBooking",{booking:booking,traveler:travel,flight:$scope.flightDetail}).then(data=>{
+kosong.attr("class","")
+kosong1.attr("class","")
+    kosong.eq(0).val(Number(kosong.eq(0).val())+1)
+    kosong1.eq(0).val(Number(kosong1.eq(0).val())+1)
+for(let i=1;i<kosong.length;i++){
+    kosong.eq(i).val("")
+}
+for(let i=1;i<kosong1.length;i++){
+    kosong1.eq(i).val("")
+}
+$scope.flightDetail=[]
+$("#miles").val("0")
+console.log({booking:booking,traveler:travel,flight:$scope.flightDetail})
+
+alert("success save to .json file you can add more booking")
+
+})
+
+
+}else{
+    alert("please fill all the blank and dont forget to add at least one flight detail data")
+}
+
+}
     // DataTables configurable options
     $scope.dtOptions = DTOptionsBuilder.newOptions()
         .withDisplayLength(10)

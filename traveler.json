@@ -1,14 +1,24 @@
-{"traveler":[
-  {
-    "id": 101,
-    "firstName": "John",
-    "lastName": "Smith",
-    "birthDate": "22031980",
-    "passportNumber": "C67132712",
-    "passportCountryCode": "US",
-    "passportExpiryDate": "3001220",
-    "loyalityNumber": "O1237163122"
-
-  }
-]
+{
+  "traveler": [
+    {
+      "id": 101,
+      "firstName": "John",
+      "lastName": "Smith",
+      "birthDate": "22031980",
+      "passportNumber": "C67132712",
+      "passportCountryCode": "US",
+      "passportExpiryDate": "3001220",
+      "loyalityNumber": "O1237163122"
+    },
+    {
+      "id": 102,
+      "firstName": "sadas",
+      "lastName": "dasdsa",
+      "birthDate": "29 December, 2017",
+      "passportNumber": "panda",
+      "passportCountryCode": "C89292",
+      "passportExpiryDate": "29 December, 2017",
+      "loyalityNumber": "O9909"
+    }
+  ]
 }

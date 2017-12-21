@@ -1,24 +1,48 @@
-{"flight":[
-  {
-    "id": 231,
-    "code": "EK871",
-    "miles": 750,
-    "depAirportCode": "DXB",
-    "depDate": "13012018",
-    "depTime": "12:00",
-    "arrAirportCode": "KWI",
-    "arrDate": "13012018",
-    "arrTime": "12:50"
-  },
-  {
-    "id": 324,
-    "code": "EK858",
-    "miles": 750,
-    "depAirportCode": "KWI",
-    "depDate": "19012018",
-    "depTime": "17:45",
-    "arrAirportCode": "DXB",
-    "arrDate": "19012018",
-    "arrTime": "20:30"
-  }
-]}
+{
+  "flight": [
+    {
+      "id": 231,
+      "code": "EK871",
+      "miles": 750,
+      "depAirportCode": "DXB",
+      "depDate": "13012018",
+      "depTime": "12:00",
+      "arrAirportCode": "KWI",
+      "arrDate": "13012018",
+      "arrTime": "12:50"
+    },
+    {
+      "id": 324,
+      "code": "EK858",
+      "miles": 750,
+      "depAirportCode": "KWI",
+      "depDate": "19012018",
+      "depTime": "17:45",
+      "arrAirportCode": "DXB",
+      "arrDate": "19012018",
+      "arrTime": "20:30"
+    },
+    {
+      "id": 325,
+      "code": "EK789",
+      "miles": 123,
+      "depAirportCode": "BIN",
+      "depDate": "28 December, 2017",
+      "depTime": "00:03",
+      "arrAirportCode": "BIK",
+      "arrDate": "30 December, 2017",
+      "arrTime": "00:03"
+    },
+    {
+      "id": 326,
+      "code": "EK890",
+      "miles": 289,
+      "depAirportCode": "BIK",
+      "depDate": "30 December, 2017",
+      "depTime": "00:03",
+      "arrAirportCode": "BIN",
+      "arrDate": "1 January, 2018",
+      "arrTime": "00:03"
+    }
+  ]
+}
