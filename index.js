@@ -67,7 +67,7 @@ const cam=dbBooking.get('booking').find({id:Number(req.query.id)}).value()
 const cam2=dbTraveler.get('traveler').find({id:Number(cam.travelerId)}).value()
   let flight1=[]
   let travel1=[]
-  travel1.push(cam2)
+  // travel1.push(cam2)
   cam.flightIds.forEach(flights=>{
 
 const pakim=dbFlight.get('flight').find({id:Number(flights)}).value()
@@ -76,7 +76,7 @@ flight1.push(pakim)
   if(cam==undefined){
 res.json([])
   }else{
-      res.json({booking:cam,flight:flight1,traveler:travel1})
+      res.json({id:cam.id,date:cam.date,cost:cam.cost,miles:cam.miles,traveler:cam2,flight:flight1})
   }
 
 })
@@ -85,7 +85,7 @@ const cam=dbBooking.get('booking').find({travelerId:Number(req.query.id)}).value
 const cam2=dbTraveler.get('traveler').find({id:Number(cam.travelerId)}).value()
   let flight1=[]
   let travel1=[]
-  travel1.push(cam2)
+  // travel1.push(cam2)
   cam.flightIds.forEach(flights=>{
 
 const pakim=dbFlight.get('flight').find({id:Number(flights)}).value()
@@ -94,7 +94,7 @@ flight1.push(pakim)
   if(cam==undefined){
 res.json([])
   }else{
-      res.json({booking:cam,flight:flight1,traveler:travel1})
+      res.json({id:cam.id,date:cam.date,cost:cam.cost,miles:cam.miles,traveler:cam2,flight:flight1})
   }
 })
 app.get('/getTravelerById', (req, res) =>{
