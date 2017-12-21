@@ -16,9 +16,36 @@ app.get('/', (req, res) =>{
 const pakim=dbBooking.get('booking').value()
   res.render('table',{data:pakim,type:"booking"})
 })
+app.get('/details', (req, res) =>{
+  let travel=req.query.travel
+  let flight=JSON.parse(req.query.flight)
+  let flight1=[]
+  let travel1=[]
+  flight.forEach(flights=>{
+
+const pakim=dbFlight.get('flight').find({id:Number(flights)}).value()
+flight1.push(pakim)
+  })
+const pakim2=dbTraveler.get('traveler').find({id:Number(travel)}).value()
+travel1.push(pakim2)
+  res.render('details',{travel:travel1,flight:flight1})
+
+})
 app.get('/flight', (req, res) =>{
 const pakim=dbFlight.get('flight').value()
   res.render('table',{data:pakim,type:"flight"})
+})
+app.get('/random', (req, res) =>{
+// const pakim=dbFlight.get('flight').value()
+  res.render('form.html')
+})
+app.get('/generator', (req, res) =>{
+const pakim=dbBooking.get('booking').value()
+const pakim2=dbTraveler.get('traveler').value()
+const pakim3=dbFlight.get('flight').value()
+  res.render('generator',{id_booking:Number(pakim[pakim.length-1].id),id_traveler:Number(pakim2[pakim2.length-1].id)
+    ,id_flight:Number(pakim3[pakim3.length-1].id)
+  })
 })
 app.get('/traveler', (req, res) =>{
 const pakim=dbTraveler.get('traveler').value()
