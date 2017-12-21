@@ -1,0 +1,11 @@
+{
+    "booking":[
+  {
+    "id" : 123231,
+    "date": "19122017",
+    "cost": 420,
+    "miles": 1500,
+    "travelerId": 101,
+    "flightIds": [231,324]
+  }
+]}

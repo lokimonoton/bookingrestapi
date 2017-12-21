@@ -1,0 +1,14 @@
+{"traveler":[
+  {
+    "id": 101,
+    "firstName": "John",
+    "lastName": "Smith",
+    "birthDate": "22031980",
+    "passportNumber": "C67132712",
+    "passportCountryCode": "US",
+    "passportExpiryDate": "3001220",
+    "loyalityNumber": "O1237163122"
+
+  }
+]
+}

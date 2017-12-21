@@ -1,0 +1,51 @@
+{
+    "booking":[
+  {
+    "id" : 123231,
+    "date": "19122017",
+    "cost": 420,
+    "miles": 1500,
+    "travelerId": 101,
+    "flightIds": [231,324]
+  }
+],
+"flight":[
+  {
+    "id": 231,
+    "code": "EK871",
+    "miles": 750,
+    "depAirportCode": "DXB",
+    "depDate": "13012018",
+    "depTime": "12:00",
+    "arrAirportCode": "KWI",
+    "arrDate": "13012018",
+    "arrTime": "12:50"
+  },
+  {
+    "id": 324,
+    "code": "EK858",
+    "miles": 750,
+    "depAirportCode": "KWI",
+    "depDate": "19012018",
+    "depTime": "17:45",
+    "arrAirportCode": "DXB",
+    "arrDate": "19012018",
+    "arrTime": "20:30"
+  }
+],
+"traveler":[
+  {
+    "id": 101,
+    "firstName": "John",
+    "lastName": "Smith",
+    "birthDate": "22031980",
+    "passportNumber": "C67132712",
+    "passportCountryCode": "US",
+    "passportExpiryDate": "3001220",
+    "loyalityNumber": "O1237163122"
+
+  }
+]
+
+
+}
