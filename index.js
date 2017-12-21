@@ -98,11 +98,11 @@ res.json([])
   }
 })
 app.get('/getTravelerById', (req, res) =>{
-const cam=dbTraveler.get('traveler').find({id:req.query.id}).value()
+const cam=dbTraveler.get('traveler').find({id:Number(req.query.id)}).value()
   res.json(cam)
 })
 app.get('/getTravelerByLoyalityNum', (req, res) =>{
-const cam=dbTraveler.get('traveler').find({loyalityNumber:req.query.loyalitynumber}).value()
+const cam=dbTraveler.get('traveler').find({loyalityNumber:req.query.id}).value()
   res.json(cam)
 })
 app.get('/getFlightById', (req, res) =>{
